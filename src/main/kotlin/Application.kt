@@ -28,6 +28,12 @@ fun Application.module(
         get("/health") {
             call.respond(HttpStatusCode.OK, mapOf("status" to "healthy"))
         }
+        route("/v1"){
+            put("/load-data") {
+
+                call.respond(HttpStatusCode.NoContent)
+            }
+        }
     }
 }
 

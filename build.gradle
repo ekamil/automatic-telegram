@@ -1,0 +1,40 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.20'
+    id 'application'
+}
+
+group 'pl.essekkat'
+version '1.0-SNAPSHOT'
+
+application {
+    mainClass = "${group}.ApplicationKt"
+}
+
+repositories {
+    mavenCentral()
+}
+
+var kotlin_version = "1.5.30"
+var ktor_version = "1.6.3"
+var logback_version = "1.2.6"
+var jackson_version = '2.9.8'
+var mockk_version = '1.12.0'
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.21'
+    implementation "io.ktor:ktor-server-core:$ktor_version"
+    implementation "io.ktor:ktor-server-netty:$ktor_version"
+    implementation "ch.qos.logback:logback-classic:$logback_version"
+    implementation "io.ktor:ktor-jackson:$ktor_version"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
+
+    testImplementation "io.ktor:ktor-server-test-host:$ktor_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "io.mockk:mockk:${mockk_version}"
+}
+
+testResultsDirName = "$buildDir/junit-xml"
+
+tasks.create("stage") {
+    dependsOn("installDist")
+}
